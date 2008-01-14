@@ -1,0 +1,8 @@
+*Upgrade procedure:
+
+1. Run SQL:
+ALTER TABLE ezx_approve_status ADD COLUMN required_num_approvers INT(11) NOT NULL DEFAULT '0';
+
+2. Copy over new files.
+
+3. Clear ini cache.

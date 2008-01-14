@@ -1,0 +1,56 @@
+*Installation:
+
+1. Copy this folder to <ez publish root>/extension/ezapprove2
+2. Apply SQL in sql/<sql server>/schema.sql
+3. Activate the ezapprove2 extension.
+4. Clear ini, ini-override and tpl-override cache.
+
+5. You must have a cronjob script which runs the workflow cronjob.
+Easiest way to set this up is to add the following to 
+settings/override/cronjob.ini.append.php (create the file if it does
+not exist):
+
+[CronjobPart-workflow]
+Scripts[]=workflow.php
+
+Then run the following command at regular intervals from the eZ publish root directory:
+
+php runcronjobs.php workflow
+
+
+* How to use:
+
+After installing the extension, go to the administration interface
+
+Simple usage:
+1. Go to setup -> workflows
+2. Click on "Standard" workflow group
+3. Click "New workflow"
+4. Add a name like "My approval workflow"
+5. Select "Event/Approve2" and click "Add event"
+6. Select appropriate options for approval workflow
+
+7. Go to setup -> triggers
+8. Select in "content publish before" the "My approval workflow" and click "Apply changes"
+
+For the "editor":
+After he/she have edited content, it will now be sent for approval. 
+While it is awaiting approval, it will be visible in "My pending items" and 
+"Collaboration" in "My account"
+
+For the "approver":
+The content waiting for approval will be shown in the "Collaboration" part of "My account"
+
+
+More advanced setups with approval of only some classes and so on, 
+can be done with the "multiplexer". See 
+http://ez.no/doc/ez_publish/technical_manual/3_8/reference/workflow_events/multiplexer
+
+
+Also note that you can get notification-email upon updates. You set this up by going to
+ "My account" -> "My notification settings". Check "Approval2" in 
+"Collaboration notification" and click "Apply"
+
+Note: This requires the notification cronjob to run.
+http://ez.no/doc/ez_publish/technical_manual/3_8/features/notifications
+

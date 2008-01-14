@@ -1,0 +1,8 @@
+*Upgrade procedure:
+
+1. Run SQL:
+UPDATE ezworkflow_event SET workflow_type_string = 'event_ezapprove2' WHERE workflow_type_string = 'event_ezxapprove2';
+
+2. Copy over new files.
+
+3. Clear ini cache.
