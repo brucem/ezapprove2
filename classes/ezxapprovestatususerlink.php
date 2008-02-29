@@ -52,7 +52,7 @@
 class eZXApproveStatusUserLink extends eZPersistentObject
 {
     const RoleCreator = 0;
-    const RoleApprover = 0;
+    const RoleApprover = 1;
     
     const StatusNone = 0;
     const StatusApproved = 1;
