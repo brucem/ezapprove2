@@ -345,6 +345,24 @@ class eZApprove2CollaborationHandler extends eZCollaborationItemHandler
 
             // 2. Create new version based in the pending one.
             $newVersion = $contentObject->createNewVersion( $approveStatus->attribute( 'active_version' ) );
+            // If the Object has never been published we have to copy the node
+            // assignment(s) acorss from the initial version to avoid the user
+            // being prompted for a location when publishing.
+            //
+            // It would appear that isn't done in the model for non published items.
+            if ($contentObject->attribute('published') == 0)
+            {
+              $version = $contentObject->attribute('current');
+              $nodeAssignmentList = $version->attribute( 'node_assignments' );
+              $contentObjectID = $contentObject->attribute('id');
+              $newVersionNumber = $newVersion->attribute('version');
+              foreach ( array_keys( $nodeAssignmentList ) as $key )
+              {
+                  $nodeAssignment = $nodeAssignmentList[$key];
+                  $clonedAssignment = $nodeAssignment->cloneNodeAssignment( $newVersionNumber, $contentObjectID );
+                  $clonedAssignment->store();
+              }
+            }
 
             // 3. Set pending version to rejected.
             $oldVersion = $approveStatus->attribute( 'object_version' );
