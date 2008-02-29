@@ -128,7 +128,7 @@ class eZApprove2Type extends eZWorkflowEventType
         if ( !$object )
         {
             eZDebugSetting::writeError( 'kernel-workflow-approve', $parameters['object_id'], 'eZApprove2Type::execute' );
-            return eZWorkflowType::STATUS_WORKFLOW_CANCELED;
+            return eZWorkflowType::STATUS_WORKFLOW_CANCELLED;
         }
 
         /*
